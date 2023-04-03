@@ -24,5 +24,7 @@ library("craTEs")
 
 # Attributions
 Method development: Cyril Pulver, Raphaël de Fondeville, Julien Pontis
+
 Implementation: Cyril Pulver
+
 Funding: Didier Trono
