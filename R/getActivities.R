@@ -91,7 +91,7 @@ getActivities <- function(expr, X, alpha = 0.1, k = 5, nlambda=100,
     lambda_min = lambda_values[lambda_min_idx]
 
     cat("\t... 2) retrieving the coefficients, crossval MSE, r_squared for the optimal lambda value\n")
-    coefs = lapply(X = Biobase::subListExtract(res, 'glmnet.fit'), FUN = predict, type='coefficients', s=lambda_min)
+    coefs = lapply(X = Biobase::subListExtract(res, 'glmnet.fit'), FUN = glmnet::predict.glmnet, type='coefficients', s=lambda_min)
 
     # r_squared at the overall best lambda
     temp = Biobase::subListExtract(res, 'glmnet.fit')
