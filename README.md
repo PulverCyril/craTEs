@@ -1,5 +1,5 @@
 # craTEs
-Estimate the cis-regulatory activity of transposable element (TEs) subfamilies
+Estimates the cis-regulatory activity of transposable element (TEs) subfamilies using RNA-seq data.
 
 # Installation
 Depends on the following Bioconductor packages: `Biobase`, `GenomicFeatures` and `GenomicRanges` that must be installed before `craTEs`.
