@@ -2,7 +2,7 @@ Package: craTEs
 Title: Estimate the cis-regulatory activity of transposable element subfamilies from RNA-seq data
 Version: 0.0.0.9000
 Authors@R: c( 
-    person("Didier", "Trono", email = "didier.trono@epfl.ch", role = c("fnd"))
+    person("Didier", "Trono", email = "didier.trono@epfl.ch", role = c("fnd")),
     person("Cyril", "Pulver", email = "pulver.cyril@hotmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2827-2564")))
 Description: A wrapper around `lm` and `glmnet` to regress the cis-regulatory activity of transposable elements onto gene expression data.
