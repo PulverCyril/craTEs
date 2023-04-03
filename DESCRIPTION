@@ -16,6 +16,7 @@ Imports:
     Biobase,
     doParallel,
     GenomicFeatures,
+    GenomicRanges,
     glmnet,
     purrr,
     RColorBrewer

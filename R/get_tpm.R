@@ -14,7 +14,7 @@ get_tpm <- function(x, org=c('hg19', 'mm9', 'rheMac8')) {
                             #goldenPath_url = 'http://hgdownload.cse.ucsc.edu/goldenPath',
                             )
     exonic <- GenomicFeatures::exonsBy(ens, by='gene')
-    red.exonic <- purrr::reduce(exonic)
+    red.exonic <- GenomicRanges::reduce(exonic)
     exon.lengths <- sum(width(red.exonic))
     names(exon.lengths) <- unlist(lapply(strsplit(names(exon.lengths), '\\.'), function(x) x[[1]]))
     exon.lengths.o <- exon.lengths[rownames(countTable)]

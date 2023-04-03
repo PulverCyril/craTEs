@@ -8,7 +8,7 @@ get_exonic_lengths <- function(org='hg19') {
                             url = 'http://genome-euro.ucsc.edu/cgi-bin/'
                            )
     exonic <- GenomicFeatures::exonsBy(ens, by='gene')
-    red.exonic <- purrr::reduce(exonic)
+    red.exonic <- GenomicRanges::reduce(exonic)
     exon.lengths <- sum(width(red.exonic))
     # Removing ENSEMBL gene versions
     names(exon.lengths) <- unlist(lapply(strsplit(names(exon.lengths), '\\.'), function(x) x[[1]]))
