@@ -7,7 +7,7 @@
 #' @return a TPM matrix with ensembl ID as rownames, samples as columns
 get_tpm <- function(x, org=c('hg19', 'mm9', 'rheMac8')) {
     countTable = x
-    org <- GenomicFeatures::match.arg(org)
+    org <- match.arg(org)
     ens <- GenomicFeatures::makeTxDbFromUCSC(genome=org,
                             tablename='ensGene',
                             url = 'http://genome-euro.ucsc.edu/cgi-bin/',
