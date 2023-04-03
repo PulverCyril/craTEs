@@ -24,7 +24,7 @@ preprocess_E_N_for_activities <- function(count_table, N,
                                           ) {
     stopifnot(is.matrix(count_table) & all(count_table>=0))
     stopifnot(is.matrix(N) & all(N>=0))
-    if(typeof(count_table != 'integer')) {
+    if(typeof(count_table) != 'integer') {
 	       warning("The count table contains non-integer values, proceed with caution")
 					  }
     # filtering genes not expressed at enough counts in at least ... samples
