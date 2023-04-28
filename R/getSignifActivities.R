@@ -7,9 +7,10 @@
 #' @param N predictor matrix with genes as rows and TE subfamilies as columns
 #' @param treatment_group vector with the name of treated samples (correspond to columns in E_centered)
 #' @param control_group same for control samples
+#' @param exclude_genes vector with the name of genes to be exluded from E and N, if their expression is assumed to be driven by TE-independent means (e.g overexpression / knockdown / knockout)
 #' @return list object with estimated activities and useful diagnostics (e.g R2)
 #' @export
-getSignifActivities <- function(E_centered, N, treatment_group, control_group) {
+getSignifActivities <- function(E_centered, N, treatment_group, control_group, exclude_genes = NULL) {
     print('Starting new sample')
 
     # defensive programming
@@ -19,6 +20,22 @@ getSignifActivities <- function(E_centered, N, treatment_group, control_group) {
     stopifnot(all(sapply(control_group, function(x) x %in% colnames(E_centered))))
 
     stopifnot(all(sapply(control_group, function(x) ! x %in% treatment_group)))
+
+    # excluding artificially manipulated genes
+    genes_excluded = c()
+    if(! is.null(exclude_genes)) {
+	    for(g in exclude_genes) {
+		    if (g %in% rownames(E_centered)) {
+			    to_delete = which(rownames(E_centered) == g)
+			    E_centered = E_centered[-to_delete, ]             
+			    to_delete = which(rownames(N) == g)
+			    N = N[-to_delete, ]
+			    genes_excluded = c(genes_excluded, g)
+		    }
+	    }
+    }
+
+    stopifnot(dim(E_centered)[1]==dim(N)[1])
 
     # generating the difference in expression vector
 
@@ -62,5 +79,6 @@ getSignifActivities <- function(E_centered, N, treatment_group, control_group) {
     res$rss = deviance(fit)
     res$p = ncol(N)
     res$N = nrow(E_centered)
+    res$genes_excluded = genes_excluded
     return(res)
 }
