@@ -9,8 +9,9 @@
 #' @param main title of the plot
 #' @param n_subplots when plotting several plots on the same figure (e.g par(mar=c(2, 2))), we only reset par() after the last subplot is drawn
 #' @param idx belongs to the interval [1, n_subplots] and triggers the reset of par() when it equals n_subplots
+#' @param plot_signif_thresh whether to explicitely plot the significance threshold as a dotted line
 #' @export 
-plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=1, idx=1) { 
+plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=1, idx=1, plot_signif_thresh=FALSE) { 
    
     stopifnot(alpha <= 1 & alpha >= 0)
     stopifnot(idx <= n_subplots)
@@ -31,18 +32,20 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     }
     
     # identifying significant coefficients (will be plotted in black, not grey)
+    coefs_non_signif = res$coefs
     signif = which(res$coefs$p_adj <= alpha)
     coefs_signif = res$coefs[signif,]
-    coefs_non_signif = res$coefs[-signif,]
+    if (nrow(coefs_signif)>0) {
+        coefs_non_signif = res$coefs[-signif,]
+    }
     
     coef_labels = NULL
-    largest_label_length = NULL
-    if (! is.null(n_label)) {
+    largest_label_length = 0
+    if (! is.null(n_label) & nrow(coefs_signif) > 0) {
         coef_labels = coefs_signif[head(order(coefs_signif$p_adj), n_label), ]
         largest_label_length = max(sapply(rownames(coef_labels), nchar))
 
     }
-    
     
     # correcting the plot margins for the error bars and the labels to fit in
     std_offset = rep(0, nrow(coefs_signif))
@@ -62,6 +65,10 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     
     y_min = 0
     y_max = max(na.omit((-log10(res$coefs[, 'p_adj']))))
+    if(plot_signif_thresh & y_max < -log10(alpha)) {
+        y_max = -log10(alpha)
+        
+    }
     y_margin = 0.04*(y_max-y_min)
     
     xlabel = 'Activity'
@@ -78,12 +85,18 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     # moving main title up
     title(main, line=1, cex.main = 2)
     
+    # plotting the significance threshold
+    if(plot_signif_thresh) {
+        abline(h = -log10(alpha), col = 'red', lty = 2, lwd = 2)
+    }
+    
     # plotting the 0.95 confidence interval for the estimated coefficient
     if(nrow(coefs_signif > 0)) {
         arrows(x0=coefs_signif$Estimate - std_offset, y0=-log10(coefs_signif$p_adj), x1=coefs_signif$Estimate + std_offset, y1=-log10(coefs_signif$p_adj), 
                code=3, angle=90, length=0.05,
                col="grey", lwd=1.5)
     }
+
     
     # non significant activities
     points(coefs_non_signif$Estimate, -log10(coefs_non_signif$p_adj), col = 'grey')
