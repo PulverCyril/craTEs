@@ -4,7 +4,13 @@
 \alias{getSignifActivities}
 \title{Estimates and returns the activities of TE subfamilies by multiple linear regression}
 \usage{
-getSignifActivities(E_centered, N, treatment_group, control_group)
+getSignifActivities(
+  E_centered,
+  N,
+  treatment_group,
+  control_group,
+  exclude_genes = NULL
+)
 }
 \arguments{
 \item{E_centered}{matrix of gene expression values with genes as rows and samples as columns}
@@ -14,6 +20,8 @@ getSignifActivities(E_centered, N, treatment_group, control_group)
 \item{treatment_group}{vector with the name of treated samples (correspond to columns in E_centered)}
 
 \item{control_group}{same for control samples}
+
+\item{exclude_genes}{vector with the name of genes to be exluded from E and N, if their expression is assumed to be driven by TE-independent means (e.g overexpression / knockdown / knockout)}
 }
 \value{
 list object with estimated activities and useful diagnostics (e.g R2)

@@ -10,7 +10,8 @@ plot_signif_subfams(
   n_label = NULL,
   main = NULL,
   n_subplots = 1,
-  idx = 1
+  idx = 1,
+  plot_signif_thresh = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ plot_signif_subfams(
 \item{n_subplots}{when plotting several plots on the same figure (e.g par(mar=c(2, 2))), we only reset par() after the last subplot is drawn}
 
 \item{idx}{belongs to the interval \link{1, n_subplots} and triggers the reset of par() when it equals n_subplots}
+
+\item{plot_signif_thresh}{whether to explicitely plot the significance threshold as a dotted line}
 }
 \description{
 Black dots are significant activities, grey dots are non significant activities.
