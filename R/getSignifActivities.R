@@ -25,9 +25,11 @@ getSignifActivities <- function(E_centered, N, treatment_group, control_group, e
     genes_excluded = c()
     if(! is.null(exclude_genes)) {
 	    genes_excluded = exclude_genes[exclude_genes %in% rownames(E_centered)]
-	    to_delete = which(rownames(E_centered) %in% genes_excluded)
-	    E_centered = E_centered[-to_delete, ]
-	    N = N[-to_delete, ]
+	    if (length(genes_excluded) > 0) {
+		    to_delete = which(rownames(E_centered) %in% genes_excluded)
+		    E_centered = E_centered[-to_delete, ]
+		    N = N[-to_delete, ]
+	    }
     }
     stopifnot(all(rownames(E_centered) == rownames(N)))
 
