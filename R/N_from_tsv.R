@@ -6,7 +6,7 @@
 #' @return matrix N
 #' @export
 N_from_tsv <- function(filename) {
-	N = data.table:fread(filename, header=T, sep='\t', stringsAsFactors = F, data.table=FALSE):
+	N = data.table:fread(filename, header=T, sep='\t', stringsAsFactors = F, data.table=FALSE)
 	rownames(N) = N$V1
 	N$V1 = NULL
 	colnames(N) = gsub(pattern = '-', replacement = '.', x = colnames(N))
