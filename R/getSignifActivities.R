@@ -24,18 +24,12 @@ getSignifActivities <- function(E_centered, N, treatment_group, control_group, e
     # excluding artificially manipulated genes
     genes_excluded = c()
     if(! is.null(exclude_genes)) {
-	    for(g in exclude_genes) {
-		    if (g %in% rownames(E_centered)) {
-			    to_delete = which(rownames(E_centered) == g)
-			    E_centered = E_centered[-to_delete, ]             
-			    to_delete = which(rownames(N) == g)
-			    N = N[-to_delete, ]
-			    genes_excluded = c(genes_excluded, g)
-		    }
-	    }
+	    genes_excluded = exclude_genes[exclude_genes %in% rownames(E_centered)]
+	    to_delete = which(rownames(E_centered) %in% genes_excluded)
+	    E_centered = E_centered[-to_delete, ]
+	    N = N[-to_delete, ]
     }
-
-    stopifnot(dim(E_centered)[1]==dim(N)[1])
+    stopifnot(all(rownames(E_centered) == rownames(N)))
 
     # generating the difference in expression vector
 
