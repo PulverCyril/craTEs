@@ -7,6 +7,7 @@
 #' @param count_table gene count table with rows as genes, columns as samples
 #' @param q quantile of non-zero values used as a pseudocount in each sample (default: q = 0.05)
 #' @return count table with added pseudocounts
+#' @export
 
 get_pseudocounts <- function(count_table, q=0.05) {
         stopifnot(is.matrix(count_table))
