@@ -23,7 +23,7 @@ library("craTEs")
 [Martins et al., KRAB zinc finger proteins ZNF587/ZNF417 protect lymphoma cells from replicative stress-induced inflammation](https://www.biorxiv.org/content/10.1101/2023.03.08.531722v1)
 
 # Attributions
-Method development: Cyril Pulver, Raphaël de Fondeville, Julien Pontis, Didier Trono
+Method development: Cyril Pulver, Raphaël de Fondeville, Julien Pontis
 
 Implementation: Cyril Pulver
 
