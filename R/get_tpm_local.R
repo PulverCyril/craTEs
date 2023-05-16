@@ -4,19 +4,20 @@
 #' @param org organism (defaults to 'hg19')
 #' @param exonic_lengths_path path to where computed exonic lengths are stored, to avoid recomputing them everytime
 #' @param redownload_exons forces the download and computation of exon lengths from scratch
+#' @param exons_dir directory where the gene models get saved
 #' @return matrix of TPMs with ensembl id as rows and samples as columns 
-get_tpm_local <- function(countTable, org='hg19', exonic_lengths_path=NULL, redownload_exons=FALSE) {
+get_tpm_local <- function(countTable, org='hg19', exonic_lengths_path=NULL, redownload_exons=FALSE, exons_dir = "../data/temp/") {
     # Defensive programming
     stopifnot(is.matrix(countTable))
 
     if(is.null(exonic_lengths_path)) {
-        exonic_lengths_path = paste0('../data/temp/', org, '_exon_lengths.RDS')
+        exonic_lengths_path = paste0(exons_dir, org, '_exon_lengths.RDS')
     }
     
     # checking for the existence of a previously generated exon_length vector
     
     if(!dir.exists(dirname(exonic_lengths_path))){
-        dir.create(dirname(exonic_lengths_path), showWarnings = FALSE)
+        dir.create(dirname(exonic_lengths_path), showWarnings = FALSE, recursive = T)
     }
     
     exonic_lengths = NULL

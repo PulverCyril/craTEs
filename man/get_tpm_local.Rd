@@ -8,7 +8,8 @@ get_tpm_local(
   countTable,
   org = "hg19",
   exonic_lengths_path = NULL,
-  redownload_exons = FALSE
+  redownload_exons = FALSE,
+  exons_dir = "../data/temp/"
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ get_tpm_local(
 \item{exonic_lengths_path}{path to where computed exonic lengths are stored, to avoid recomputing them everytime}
 
 \item{redownload_exons}{forces the download and computation of exon lengths from scratch}
+
+\item{exons_dir}{directory where the gene models get saved}
 }
 \value{
 matrix of TPMs with ensembl id as rows and samples as columns

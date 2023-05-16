@@ -12,7 +12,8 @@ preprocess_E_N_for_activities(
   pseudocount_quantile = 0.05,
   log_tpm_plot_path,
   preds_protected = NULL,
-  redownload_exons = FALSE
+  redownload_exons = FALSE,
+  exons_dir = "../data/temp/"
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ preprocess_E_N_for_activities(
 \item{preds_protected}{vector containing the names of predictors that cannot be filtered out based on N_threshold}
 
 \item{redownload_exons}{TRUE: exons are redownloaded to compute TPMs. FALSE: exons are not redownloaded to compute TPMs.}
+
+\item{exons_dir}{directory where gene models are saved to avoid a redownload}
 
 \item{count_threhold}{c(a,b) with a the minimum number of counts in at least b genes to keep a gene present in E}
 

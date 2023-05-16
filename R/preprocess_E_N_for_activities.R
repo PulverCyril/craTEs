@@ -12,6 +12,7 @@
 #' @param import_path path pointing to the other R functions required for the pre-processing
 #' @param preds_protected vector containing the names of predictors that cannot be filtered out based on N_threshold
 #' @param redownload_exons TRUE: exons are redownloaded to compute TPMs. FALSE: exons are not redownloaded to compute TPMs.
+#' @param exons_dir directory where gene models are saved to avoid a redownload
 #' @return a list object with a centered expression matrix and a filtered N matrix
 #' @export
 preprocess_E_N_for_activities <- function(count_table, N, 
@@ -20,7 +21,8 @@ preprocess_E_N_for_activities <- function(count_table, N,
                                           pseudocount_quantile=0.05,
                                           log_tpm_plot_path,
                                           preds_protected=NULL,
-                                          redownload_exons=FALSE
+                                          redownload_exons=FALSE,
+					  exons_dir = "../data/temp/"
                                           ) {
     stopifnot(is.matrix(count_table) & all(count_table>=0))
     stopifnot(is.matrix(N) & all(N>=0))
@@ -60,7 +62,7 @@ preprocess_E_N_for_activities <- function(count_table, N,
     count_table = get_pseudocounts(count_table, pseudocount_quantile)
 
     # computing log2(tpm), keeping them for the graph
-    log_tpm = log2(get_tpm_local(count_table, redownload_exons=redownload_exons))
+    log_tpm = log2(get_tpm_local(count_table, redownload_exons=redownload_exons, exons_dir = exons_dir))
     gc()
 
     # plotting log tpm for quality control
