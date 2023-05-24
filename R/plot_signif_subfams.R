@@ -86,9 +86,6 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     }
     plot(NULL, type='n', xlim = c(x_min - x_margin, x_max + 2*x_margin), ylim = c(y_min, y_max + y_margin),
         xlab = xlabel, ylab = ylabel, cex.lab = 2.5, cex.axis = 2.5)
-
-    # moving main title up
-    title(main, line=1, cex.main = 2)
     
     # plotting the significance threshold
     if(plot_signif_thresh) {
