@@ -10,8 +10,9 @@
 #' @param n_subplots when plotting several plots on the same figure (e.g par(mar=c(2, 2))), we only reset par() after the last subplot is drawn
 #' @param idx belongs to the interval [1, n_subplots] and triggers the reset of par() when it equals n_subplots
 #' @param plot_signif_thresh whether to explicitely plot the significance threshold as a dotted line
+#' @param saturate_padj_at representative p-value beyond which any smaller adjusted p-value is "saturated" to
 #' @export 
-plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=1, idx=1, plot_signif_thresh=FALSE) { 
+plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=1, idx=1, plot_signif_thresh=FALSE, saturate_padj_at=1e-150) { 
    
     stopifnot(alpha <= 1 & alpha >= 0)
     stopifnot(idx <= n_subplots)
@@ -24,11 +25,11 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
         on.exit(par(old_par))
     }
     # changing margin sizes
-    par(mar=c(4.1, 4.8, 2.5, 2.5))
+    par(mar=c(4.1, 4.8, 2.6, 2.5))
     
     # when doing subplots, no need for space for the x and y labels
     if(n_subplots > 1) {
-        par(mar=c(3.5, 3.5, 2.5, 2.5))
+        par(mar=c(3.5, 3.5, 2.7, 2.5))
     }
     
     # identifying significant coefficients (will be plotted in black, not grey)
@@ -38,6 +39,10 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     if (nrow(coefs_signif)>0) {
         coefs_non_signif = res$coefs[-signif,]
     }
+
+    # replacing p_adj < 1e-150 by 1e-150
+    to_saturate = which(coefs_signif$p_adj < saturate_padj_at)
+    coefs_signif[to_saturate, "p_adj"] = saturate_padj_at
     
     coef_labels = NULL
     largest_label_length = 0
@@ -64,7 +69,7 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     } else {x_margin = std_offset_margin}
     
     y_min = 0
-    y_max = max(na.omit((-log10(res$coefs[, 'p_adj']))))
+    y_max = min(max(na.omit((-log10(res$coefs[, 'p_adj'])))), -log10(saturate_padj_at)) 
     if(plot_signif_thresh & y_max < -log10(alpha)) {
         y_max = -log10(alpha)
         
@@ -89,6 +94,11 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     if(plot_signif_thresh) {
         abline(h = -log10(alpha), col = 'red', lty = 2, lwd = 2)
     }
+    # moving main title up and adding overall F-test padj as a subtitle
+    f_test_signif = signif(pval_from_fstat(res), digits = 3)
+    subtitle = paste0("p-val = ", f_test_signif, ", F-test")
+    title(main, line=1.3, cex.main = 2)
+    mtext(text = subtitle, side = 3, line = 0)
     
     # plotting the 0.95 confidence interval for the estimated coefficient
     if(nrow(coefs_signif > 0)) {
@@ -104,6 +114,11 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
     # significant activities
     points(coefs_signif$Estimate, -log10(coefs_signif$p_adj), col = 'black', cex=1.3)
     
+    # indicate saturation
+    if(y_max >= -log10(saturate_padj_at)) {
+	    abline(h = -log10(saturate_padj_at), lty = 'dotted')
+            text(x = 0, y = y_max + y_margin/2, labels = paste0("adj. p-value < ", saturate_padj_at), cex = 1.2)
+    }
 
     if (! is.null(n_label) & nrow(coefs_signif) > 0) {
         # adding the name of the top n TE subfams to the plot

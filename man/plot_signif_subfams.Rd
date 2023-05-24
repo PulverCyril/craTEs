@@ -11,7 +11,8 @@ plot_signif_subfams(
   main = NULL,
   n_subplots = 1,
   idx = 1,
-  plot_signif_thresh = FALSE
+  plot_signif_thresh = FALSE,
+  saturate_padj_at = 1e-150
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ plot_signif_subfams(
 \item{idx}{belongs to the interval \link{1, n_subplots} and triggers the reset of par() when it equals n_subplots}
 
 \item{plot_signif_thresh}{whether to explicitely plot the significance threshold as a dotted line}
+
+\item{saturate_padj_at}{representative p-value beyond which any smaller adjusted p-value is "saturated" to}
 }
 \description{
 Black dots are significant activities, grey dots are non significant activities.
