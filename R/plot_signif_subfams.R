@@ -11,8 +11,9 @@
 #' @param idx belongs to the interval [1, n_subplots] and triggers the reset of par() when it equals n_subplots
 #' @param plot_signif_thresh whether to explicitely plot the significance threshold as a dotted line
 #' @param saturate_padj_at representative p-value beyond which any smaller adjusted p-value is "saturated" to
+#' @param plot_f_test whether to plot the p-value of the overall F-test for regression as a subtitle
 #' @export 
-plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=1, idx=1, plot_signif_thresh=FALSE, saturate_padj_at=1e-150) { 
+plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=1, idx=1, plot_signif_thresh=FALSE, saturate_padj_at=1e-150, plot_f_test=FALSE) { 
    
     stopifnot(alpha <= 1 & alpha >= 0)
     stopifnot(idx <= n_subplots)
@@ -25,11 +26,17 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
         on.exit(par(old_par))
     }
     # changing margin sizes
-    par(mar=c(4.1, 4.8, 2.6, 2.5))
+    par(mar=c(4.1, 4.8, 2.5, 2.5))
+    if(plot_f_test) {
+	    par(mar=c(4.1, 4.8, 2.6, 2.5))
+    }
     
     # when doing subplots, no need for space for the x and y labels
     if(n_subplots > 1) {
-        par(mar=c(3.5, 3.5, 2.7, 2.5))
+        par(mar=c(3.5, 3.5, 2.5, 2.5))
+    	if(plot_f_test) {
+		par(mar=c(4.1, 4.8, 2.7, 2.5))
+	}
     }
     
     # identifying significant coefficients (will be plotted in black, not grey)
@@ -92,11 +99,14 @@ plot_signif_subfams <- function(res, alpha, n_label=NULL, main=NULL, n_subplots=
         abline(h = -log10(alpha), col = 'red', lty = 2, lwd = 2)
     }
     # moving main title up and adding overall F-test padj as a subtitle
-    f_test_signif = signif(pval_from_fstat(res), digits = 3)
-    subtitle = paste0("p-val = ", f_test_signif, ", F-test")
-    title(main, line=1.3, cex.main = 2)
-    mtext(text = subtitle, side = 3, line = 0)
-    
+    if(plot_f_test) {
+	    f_test_signif = signif(pval_from_fstat(res), digits = 3)
+	    subtitle = paste0("p-val = ", f_test_signif, ", F-test")
+	    title(main, line=1.3, cex.main = 2)
+	    mtext(text = subtitle, side = 3, line = 0)
+    } else {
+	    title(main, line=1, cex.main = 2)
+    }
     # plotting the 0.95 confidence interval for the estimated coefficient
     if(nrow(coefs_signif > 0)) {
         arrows(x0=coefs_signif$Estimate - std_offset, y0=-log10(coefs_signif$p_adj), x1=coefs_signif$Estimate + std_offset, y1=-log10(coefs_signif$p_adj), 

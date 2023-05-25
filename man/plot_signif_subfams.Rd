@@ -12,7 +12,8 @@ plot_signif_subfams(
   n_subplots = 1,
   idx = 1,
   plot_signif_thresh = FALSE,
-  saturate_padj_at = 1e-150
+  saturate_padj_at = 1e-150,
+  plot_f_test = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ plot_signif_subfams(
 \item{plot_signif_thresh}{whether to explicitely plot the significance threshold as a dotted line}
 
 \item{saturate_padj_at}{representative p-value beyond which any smaller adjusted p-value is "saturated" to}
+
+\item{plot_f_test}{whether to plot the p-value of the overall F-test for regression as a subtitle}
 }
 \description{
 Black dots are significant activities, grey dots are non significant activities.
