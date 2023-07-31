@@ -31,8 +31,9 @@ activities = craTEs::getSignifActivities(preprocessed$E_centered, preprocessed$N
 
 # plotting cis-regulatory subfamilies (with example output)
 craTEs::plot_signif_subfams(activities, 0.05, 4, "Epigenetic repression of LTR5-Hs/SVA g#1")
-![image](https://github.com/bopekno/craTEs/assets/44056089/02c2017a-819a-4dd1-a9fd-3706b70d7538)
 ```
+![image](https://github.com/bopekno/craTEs/assets/44056089/02c2017a-819a-4dd1-a9fd-3706b70d7538)
+
 See [this jupyter notebook](https://renkulab.io/gitlab/crates/klf4-znf611-sva-crispri/-/blob/master/notebooks/TE_subfamily_diff_activity_poc.md) for examples of more complex use cases.
 
 
