@@ -8,7 +8,8 @@ split_N_to_functional(
   N,
   N_functional,
   threshold = 100,
-  subfams_protected = c()
+  subfams_protected = c(),
+  suffix = "_functional"
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ split_N_to_functional(
 \item{threshold}{minimum sum of cis-regulatory weights over genes at both the non-funtional and funtional fractions for a subfamily to be split}
 
 \item{subfams_protected}{will be split irrespective of \code{threshold}}
+
+\item{suffix}{character string denoting functional subfamilies (default is "_functional")}
 }
 \value{
 functional equivalent of the input matrix \code{N}

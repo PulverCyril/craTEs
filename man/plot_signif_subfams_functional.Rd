@@ -11,7 +11,8 @@ plot_signif_subfams_functional(
   main = NULL,
   n_subplots = 1,
   idx = 1,
-  subfams_to_label = NULL
+  subfams_to_label = NULL,
+  suffix = "_functional"
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ plot_signif_subfams_functional(
 \item{idx}{belongs to the interval \link{1, n_subplots} and triggers the reset of par() when it equals n_subplots}
 
 \item{subfams_to_label}{subfamilies for which a label is written on the plot, next to the functional activity point (red). Defaults to \code{subfams_to_plot}}
+
+\item{suffix}{character string denoting the functional fractions of subfamilies}
 }
 \description{
 Black dot: activity of the entire subfamily. Red dot: activity of the functional fraction of the subfamily. Blue dot: activity of the non-functional fraction of the subfamily.

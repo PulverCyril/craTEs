@@ -6,17 +6,19 @@
 #' @param N_functional unfiltered functional matrix corresponding to N (e.g same bandwidth parameter L)
 #' @param threshold minimum sum of cis-regulatory weights over genes at both the non-funtional and funtional fractions for a subfamily to be split
 #' @param subfams_protected will be split irrespective of `threshold`
+#' @param suffix character string denoting functional subfamilies (default is "_functional")
 #' @return functional equivalent of the input matrix `N`
 #' @export
 split_N_to_functional <- function(N,
                                   N_functional,
                                   threshold = 100,
-                                  subfams_protected = c()) {
+                                  subfams_protected = c(),
+				  suffix = "_functional") {
     # subsetting N_functional to match the genes selected in N due to preprocessing
     N_functional = N_functional[rownames(N), ]
     
     subfams_kept = colnames(N)
-    subfams_kept_functional = paste0(subfams_kept, '_functional')
+    subfams_kept_functional = paste0(subfams_kept, suffix)
     subfams_kept_functional = subfams_kept_functional[subfams_kept_functional %in% colnames(N_functional)]
     subfams_exact_split = c(subfams_kept, subfams_kept_functional)
 
@@ -25,7 +27,7 @@ split_N_to_functional <- function(N,
     cols_N_standard_kept = c()
     for (s in subfams_kept) {
         # Are there actually functional integrants ?
-        s_functional = paste0(s, '_functional')
+        s_functional = paste0(s, suffix)
         if(s_functional %in% colnames(N_functional)) {
             if (s_functional %in% subfams_kept_functional) {
                 # should we keep the functional and non functional fractions ?

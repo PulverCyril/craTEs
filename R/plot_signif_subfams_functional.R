@@ -9,6 +9,7 @@
 #' @param n_subplots when plotting several plots on the same figure (e.g par(mar=c(2, 2))), we only reset par() after the last subplot is drawn
 #' @param idx belongs to the interval [1, n_subplots] and triggers the reset of par() when it equals n_subplots
 #' @param subfams_to_label subfamilies for which a label is written on the plot, next to the functional activity point (red). Defaults to `subfams_to_plot`
+#' @param suffix character string denoting the functional fractions of subfamilies
 #' @export 
 plot_signif_subfams_functional <- function(res,
                                            res_functional,
@@ -16,7 +17,8 @@ plot_signif_subfams_functional <- function(res,
                                            main=NULL,
                                            n_subplots=1,
                                            idx=1,
-                                          subfams_to_label = NULL) { 
+                                          subfams_to_label = NULL,
+					  suffix = "_functional") { 
     ## Description: volcano plot with TE subfamily activities on the x axis, activity coefficient significance on the y axis
         ## para: -res: result file returned by getSignifActivities.R
                 #-alpha: BH-adjusted threshold for significance (black circles)
@@ -48,11 +50,11 @@ plot_signif_subfams_functional <- function(res,
     # 2) the activity of the whole subfamily (from res) in black
     # 3) the activity of the non functional fraction of the subfamily (from res_functional, subfam) in blue
     
-    subfams_to_plot_functional = paste0(subfams_to_plot, '_functional')
+    subfams_to_plot_functional = paste0(subfams_to_plot, suffix)
 
     act_functional = res_functional$coefs[subfams_to_plot_functional, ]
     act_non_functional = res_functional$coefs[subfams_to_plot, ]
-    rownames(act_non_functional) = paste0(rownames(act_non_functional), 'non_functional')
+    rownames(act_non_functional) = paste0(rownames(act_non_functional), paste0('non', suffix))
     
     act_standard = res$coefs[subfams_to_plot, ]
     
@@ -126,12 +128,12 @@ plot_signif_subfams_functional <- function(res,
     
     # labeling, only for subfams_to_legend 
     if(is.null(subfams_to_label)) {
-        text(x = act_functional$Estimate, y=-log10(act_functional$p_adj), labels = gsub('_functional', '', rownames(act_functional)), adj = c(-0.1, -0.4), cex = 1.4) 
+        text(x = act_functional$Estimate, y=-log10(act_functional$p_adj), labels = gsub(suffix, '', rownames(act_functional)), adj = c(-0.1, -0.4), cex = 1.4) 
     } else {
         
-        subfam_selection = rownames(act_functional)[rownames(act_functional) %in% paste0(subfams_to_label, '_functional')]
+        subfam_selection = rownames(act_functional)[rownames(act_functional) %in% paste0(subfams_to_label, suffix)]
         act_functional_subfam_selection = act_functional[subfam_selection, ]
-        text(x = act_functional_subfam_selection$Estimate, y=-log10(act_functional_subfam_selection$p_adj), labels = gsub('_functional', '', rownames(act_functional_subfam_selection)), adj = c(-0.1, -0.4), cex = 1.8) 
+        text(x = act_functional_subfam_selection$Estimate, y=-log10(act_functional_subfam_selection$p_adj), labels = gsub(suffix, '', rownames(act_functional_subfam_selection)), adj = c(-0.1, -0.4), cex = 1.8) 
     }
         
 }
