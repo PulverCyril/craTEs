@@ -11,7 +11,7 @@ if (!require("BiocManager", quietly = TRUE))
 BiocManager::install(version = "3.16")
 BiocManager::install(c("Biobase", "GenomicFeatures", "GenomicRanges", "RMariaDB"))
 library("devtools")
-devtools::install_github("bopekno/craTEs")
+devtools::install_github("pulvercyril/craTEs")
 ```
 # Usage
 
