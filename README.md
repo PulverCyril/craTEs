@@ -1,5 +1,17 @@
 # craTEs
-Estimates the cis-regulatory activity of transposable element (TEs) subfamilies using RNA-seq data.
+Estimates the cis-regulatory activity of transposable element (TE) subfamilies from standardly processed RNA-seq data.
+
+# Why should I care?
+Are you looking for cis-regulatory sequences that may explain your transcriptomic data? Then read on. Transposable elements (TEs) are virus-like selfish genetic parasites of eukaryote genomes, most of which replicate in a copy-and-paste manner. For instance, at least half of the human genome is TE-derived. To replicate, TEs must first attract the host transcriptional machinery and have therefore evolved embedded cis-regulatory sequences to attract host transcription factors and epigenetic modifiers. In short, as TEs spread, they litter genomes with hundreds to thousands copies of ready-to-use cis-regulatory platforms. It is now widely believed that waves of TE invasion contribute to enhancer turnover. 
+
+Here are the painpoints you will avoid thanks to craTEs: 
+- Remapping your RNA-seq data to TE sequences, which are masked in standard mapping pipelines. In addition, we have shown that TE-derived transcription is not necessarily a goody proxy for TE-mediated cis-regulation.
+- Having to generate epigenomics data, such as ChIP-seq, ATAC-seq, DHS-seq to get insights into the role of specific TE subfamilies in gene regulation.
+
+Here is what you will benefit from using craTEs:
+- Interpretable quantitative estimates of TE-mediated cis-regulatory activities
+- Leveraging replicates to maximize statistical power
+- A lightweight method that easily scales to screening thousands of RNA-seq experiments for TE-mediated cis-regulation
 
 # Installation
 Depends on the following Bioconductor packages: `Biobase`, `GenomicFeatures`, `GenomicRanges` and `RMariaDB` that must be installed before `craTEs`.
