@@ -21,3 +21,6 @@ Imports:
     glmnet,
     purrr,
     RColorBrewer
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
