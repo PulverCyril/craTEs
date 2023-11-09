@@ -12,11 +12,11 @@ Here is what you will benefit from using *craTEs*:
 - A lightweight method that easily scales to screening thousands of RNA-seq experiments for TE-mediated *cis*-regulation
 
 Here are the pain points you will avoid thanks to *craTEs*: 
-- Remapping your RNA-seq data to TE sequences, which are masked in standard mapping pipelines. In addition, we have shown that TE-derived transcription is not necessarily a goody proxy for TE-mediated *cis*-regulation.
-- Having to generate epigenomics data, such as ChIP-seq, ATAC-seq, DNase-seq to get insights into the role of specific TE subfamilies in gene regulation.
+- Remapping your RNA-seq data to TE sequences, which are masked in standard mapping pipelines. In addition, we have shown that TE-derived transcription is not necessarily a good proxy for TE-mediated *cis*-regulation.
+- Having to generate epigenomics data - e.g. ChIP-seq, ATAC-seq or DNase-seq - to get insights into the role of specific TE subfamilies in gene regulation.
 
 ## Why this acronym?
-TEs were long discarded as non-functional and uninteresting "junk DNA". *craTEs* thus alludes to the crates found in vinyl record shops, in particular the "dollar bins" in second hand shops where "diggers" go looking for forgotten gems.
+TEs were long discarded as non-functional and uninteresting "junk DNA". *craTEs* thus alludes to the crates found in vinyl record shops, in particular "dollar bins" in second hand shops where "diggers" go looking for forgotten gems.
 
 ## Usage
 
