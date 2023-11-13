@@ -18,6 +18,10 @@ Here are the pain points you will avoid thanks to *craTEs*:
 ## Why this acronym?
 TEs were long discarded as non-functional and uninteresting "junk DNA". *craTEs* thus alludes to the crates found in vinyl record shops, in particular "dollar bins" in second hand shops where "diggers" go looking for forgotten gems.
 
+## Try it!
+
+Kickstart your explorations with *craTEs* using [this repository](https://renkulab.io/projects/cyril.pulver/crates-basics) on the reproducible data science platform `renku`, powered by the Swiss Federal Instituted of Technology.
+
 ## Usage
 
 ```
