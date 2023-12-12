@@ -9,7 +9,7 @@ get_exonic_lengths <- function(org='hg19') {
                            )
     exonic <- GenomicFeatures::exonsBy(ens, by='gene')
     red.exonic <- GenomicRanges::reduce(exonic)
-    exon.lengths <- sum(width(red.exonic))
+    exon.lengths <- sum(GenomicRanges::width(red.exonic))
     # Removing ENSEMBL gene versions
     names(exon.lengths) <- unlist(lapply(strsplit(names(exon.lengths), '\\.'), function(x) x[[1]]))
     return(exon.lengths)
