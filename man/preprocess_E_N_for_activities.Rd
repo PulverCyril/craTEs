@@ -13,7 +13,8 @@ preprocess_E_N_for_activities(
   log_tpm_plot_path,
   preds_protected = NULL,
   redownload_exons = FALSE,
-  exons_dir = "../data/temp/"
+  exons_dir = "../data/temp/",
+  org = "hg19"
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ preprocess_E_N_for_activities(
 \item{redownload_exons}{TRUE: exons are redownloaded to compute TPMs. FALSE: exons are not redownloaded to compute TPMs.}
 
 \item{exons_dir}{directory where gene models are saved to avoid a redownload}
+
+\item{org}{reference assembly, one of hg19 or hg38}
 
 \item{count_threhold}{c(a,b) with a the minimum number of counts in at least b genes to keep a gene present in E}
 
