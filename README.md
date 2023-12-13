@@ -47,14 +47,14 @@ See [this jupyter notebook](https://renkulab.io/gitlab/crates/klf4-znf611-sva-cr
 
 
 ## Installation
-Depends on the following Bioconductor packages: `Biobase`, `GenomicFeatures`, `GenomicRanges` and `RMariaDB` that must be installed before `craTEs`, as per the following R commands:
+Depends on the following Bioconductor packages: `Biobase`, `GenomicFeatures`, `GenomicRanges`, `RMariaDB`, `ensembldb` and `EnsDb.Hsapiens.v86` that must be installed before `craTEs`, as per the following R commands:
 
 ```
 install.packages("devtools", quietly = TRUE)
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(version = "3.16")
-BiocManager::install(c("Biobase", "GenomicFeatures", "GenomicRanges", "RMariaDB"))
+BiocManager::install(c("Biobase", "GenomicFeatures", "GenomicRanges", "RMariaDB", "ensembldb", "EnsDb.Hsapiens.v86"))
 library("devtools")
 devtools::install_github("pulvercyril/craTEs")
 ```
