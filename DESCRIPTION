@@ -20,7 +20,9 @@ Imports:
     GenomicRanges,
     glmnet,
     purrr,
-    RColorBrewer
+    RColorBrewer,
+    ensembldb,
+    EnsDb.Hsapiens.v86
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
