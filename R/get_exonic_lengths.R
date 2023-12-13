@@ -1,7 +1,7 @@
 #' Returns the cumulated exonic length for each gene
 #'
 #' @param org organism
-get_exonic_lengths <- function(org='hg19') {
+get_exonic_lengths <- function(org=c('hg19', 'hg38')) {
     org <- match.arg(org)
     exonic <- NULL
     if (org == 'hg19') {
