@@ -32,12 +32,13 @@ get_tpm_local <- function(countTable, org='hg19', exonic_lengths_path=NULL, redo
     # normalizing to TPM
     
     # filtering of genes present in the countTable is done at this stage, therefore the full table should be stored somewhere.
-    exonic_lengths_filtered <- exonic_lengths[rownames(countTable)]
-    
-    print(head(exonic_lengths_filtered))
+    # some ensembl IDs may not be present in the exonic lengths, due changes in the ensembl database. We filter them out at this stage.
+    # This will require filtering N once again in preprocess_E_N_for_activities to remove ensembl ID absent from exonic lengths.
+    with_exons = rownames(countTable)[rownames(countTable) %in% names(exonic_lengths)]
+    exonic_lengths_filtered <- exonic_lengths[with_exons]
     
     # normalizing for gene length
-    length_norm <- countTable / exonic_lengths_filtered
+    length_norm <- countTable[with_exons, ] / exonic_lengths_filtered
     
     # normalizing for library size
     ans <- t(t(length_norm)/colSums(length_norm)) * 1e6 # see https://rpubs.com/bbolker/sweep_divide
