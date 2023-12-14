@@ -66,6 +66,9 @@ preprocess_E_N_for_activities <- function(count_table,
 
     # computing log2(tpm), keeping them for the graph
     log_tpm = log2(get_tpm_local(count_table, org=org, redownload_exons=redownload_exons, exons_dir = exons_dir))
+    
+    # the last step may have removed genes, if no annoated exons existed for them.
+    N = N[rownames(log_tpm), ]
     gc()
 
     # plotting log tpm for quality control
