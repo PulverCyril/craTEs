@@ -20,7 +20,7 @@ TEs were long discarded as non-functional and uninteresting "junk DNA". *craTEs*
 
 ## Try it!
 
-Kickstart your explorations with *craTEs* using [this repository]([https://renkulab.io/projects/cyril.pulver/crates-basics](https://renkulab.io/projects/cyril.pulver/crates-basics/sessions/new)) on the reproducible data science platform `renku`, powered by the Swiss Federal Instituted of Technology. We suggest using 2 CPUs and 8GB RAM, and using juyterlab, although you may also use RStudio if you prefer, but will have to convert the notebook to rmarkdown.
+Kickstart your explorations with *craTEs* using [this repository](https://renkulab.io/projects/cyril.pulver/crates-basics/sessions/new) on the reproducible data science platform `renku`, powered by the Swiss Federal Instituted of Technology. We suggest using 2 CPUs and 8GB RAM, and using juyterlab, although you may also use RStudio if you prefer, but will have to convert the notebook to rmarkdown.
 
 ## Usage
 
