@@ -20,7 +20,7 @@ TEs were long discarded as non-functional and uninteresting "junk DNA". *craTEs*
 
 ## Try it!
 
-Kickstart your explorations with *craTEs* using [this repository](https://renkulab.io/projects/cyril.pulver/crates-basics) on the reproducible data science platform `renku`, powered by the Swiss Federal Instituted of Technology.
+Kickstart your explorations with *craTEs* using [this repository]([https://renkulab.io/projects/cyril.pulver/crates-basics](https://renkulab.io/projects/cyril.pulver/crates-basics/sessions/new)) on the reproducible data science platform `renku`, powered by the Swiss Federal Instituted of Technology. We suggest using 2 CPUs and 8GB RAM, and using juyterlab, although you may also use RStudio if you prefer, but will have to convert the notebook to rmarkdown.
 
 ## Usage
 
@@ -45,6 +45,11 @@ craTEs::plot_signif_subfams(activities, 0.05, 4, "Epigenetic repression of LTR5-
 
 See [this jupyter notebook](https://renkulab.io/gitlab/crates/klf4-znf611-sva-crispri/-/blob/master/notebooks/TE_subfamily_diff_activity_poc.md) for examples of more complex use cases.
 
+## hg38 version
+
+While the Trono lab typically sticks to hg19 for all TE-related matters, we have created hg38-compatible N matrices for use with hg38 ensembl gene IDs. Get them from ZENODO at [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10390247.svg)](https://doi.org/10.5281/zenodo.10390247) and [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10390262.svg)](https://doi.org/10.5281/zenodo.10390262).
+
+
 
 ## Installation
 Depends on the following Bioconductor packages: `Biobase`, `GenomicFeatures`, `GenomicRanges`, `RMariaDB`, `ensembldb` and `EnsDb.Hsapiens.v86` that must be installed before `craTEs`, as per the following R commands:
@@ -60,7 +65,7 @@ devtools::install_github("pulvercyril/craTEs")
 ```
 
 ## Publications
-[Pulver et al., Statistical learning quantifies transposable element-mediated cis-regulation](https://www.biorxiv.org/content/10.1101/2022.09.23.509180v1)
+[Pulver et al., Statistical learning quantifies transposable element-mediated cis-regulation, Genome Biology 2023](https://doi.org/10.1186/s13059-023-03085-7)
 
 [Pontis et al., Primate-specific transposable elements shape transcriptional networks during human development, Nature Communications 2022](https://www.nature.com/articles/s41467-022-34800-w)
 
